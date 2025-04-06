@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace GestaoDeEquipamentosConsoleApp
 {
-    class Chamadas
+    public class Chamadas
     {
+
+        public int IdChamado;
+        public string Titulo;
+        public int IdDoEquipamento;
+        public string Descricao;
+        public DateTime DataAbertura;
+
+        public Chamadas( string titulo, int idDoEquipamento, string descricao, DateTime dataAbertura)
+        {
+            Titulo = titulo;
+            IdDoEquipamento = idDoEquipamento;
+            Descricao = descricao;
+            DataAbertura = dataAbertura;
+        }
     }
 }

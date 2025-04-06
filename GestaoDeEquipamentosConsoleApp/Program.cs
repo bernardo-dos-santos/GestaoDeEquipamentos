@@ -42,9 +42,15 @@
                     case "2":
                         continue;
 
-                
+                    default:
+                        Console.WriteLine("Comando Incorreto. Retornando...");
+                        Thread.Sleep(1500);
+                        continue;
 
-                
+
+
+
+
                 }
             }
         }
