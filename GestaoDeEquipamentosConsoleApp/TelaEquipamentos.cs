@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace GestaoDeEquipamentosConsoleApp
 {
@@ -20,9 +21,9 @@ namespace GestaoDeEquipamentosConsoleApp
             Console.WriteLine("Selecione uma das opcões abaixo: ");
 
             Console.WriteLine("1 - Cadastrar Equipamento");
-            Console.WriteLine("2 - Editar Equipamento");
-            Console.WriteLine("3 - Excluir Equipamento");
-            Console.WriteLine("4 - Visualizar Equipamentos");
+            Console.WriteLine("2 - Visualizar Equipamentos");
+            Console.WriteLine("3 - Editar Equipamento");
+            Console.WriteLine("4 - Excluir Equipamento");
 
             string opcao = Console.ReadLine()!;
             return opcao;
@@ -53,6 +54,10 @@ namespace GestaoDeEquipamentosConsoleApp
             novoEquipamento.Id = GeradorIds.GerarIdEquipamentos();
 
             equipamentos[contadorEquipamentos++] = novoEquipamento;
+
+            Console.WriteLine("O cadastro foi um sucesso");
+            Console.WriteLine("Retornando...");
+            Thread.Sleep(3000);
         }
 
         public void VisualizarEquipamentos()
@@ -75,8 +80,89 @@ namespace GestaoDeEquipamentosConsoleApp
                 Console.WriteLine(
                  "{0, -5} | {1, -20} | {2, -10} | {3, -16} | {4, -16} | {5, -9}",
                  a.Id, a.Nome, a.ObterNumeroSerie(), a.Fabricante, a.Preco.ToString("C2"), a.Data.ToShortDateString());
+            }
+            Console.WriteLine("Digite Enter para retornar ao Menu de Equipamentos");
+            Console.ReadLine();
+        }
+        public void EditarEquipamento()
+        {
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Gestão de Equipamentos");
+            Console.WriteLine("-------------------------------------------");
+
+            Console.WriteLine("Editando Equipamento");
+            Console.WriteLine("-------------------------------------------");
+
+            Console.Write("Digite o Id do equipamento: ");
+            int IdSelecionado = int.Parse(Console.ReadLine()!);
+            bool conseguiuEditar = false;
+            for (int i = 0; i < equipamentos.Length; i++)
+            {
+                if (equipamentos[i] == null) continue;
+                if (equipamentos[i].Id == IdSelecionado)
+                {
+                    Console.Write("Digite o novo nome do equipamento: ");
+                    string nome = Console.ReadLine()!;
+
+                    Console.Write("Digite o novo nome do fabricante equipamento: ");
+                    string fabricante = Console.ReadLine()!;
+
+                    Console.Write("Digite o novo preço de aquisição R$ ");
+                    decimal preco = int.Parse(Console.ReadLine()!);
+
+                    Console.Write("Digite a nova data de fabricação do equipamento (DD/MM/YYYY) ");
+                    DateTime data = Convert.ToDateTime(Console.ReadLine());
 
 
+                    Equipamentos novoEquipamento = new Equipamentos(nome, preco, data, fabricante);
+                    novoEquipamento.Id = IdSelecionado;
+                    equipamentos[i] = novoEquipamento;
+                    conseguiuEditar = true;
+                }
+            }
+
+            if(conseguiuEditar == false)
+            {
+                Console.WriteLine("O Id não foi Encontrado, Retornando...");
+                EditarEquipamento();
+            }
+        }
+
+        public void ExcluirEquipamento()
+        {
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Gestão de Equipamentos");
+            Console.WriteLine("-------------------------------------------");
+
+            Console.WriteLine("Excluindo Equipamento");
+            Console.WriteLine("-------------------------------------------");
+
+            Console.Write("Digite o Id do equipamento que deseja excluir: ");
+            int IdSelecionado = int.Parse(Console.ReadLine()!);
+            bool conseguiuExcluir = false;
+            for (int i = 0; i < equipamentos.Length; i++)
+            {
+                if (equipamentos[i] == null) continue;
+                if(equipamentos[i].Id == IdSelecionado)
+                {
+                    equipamentos[i] = null;
+                    conseguiuExcluir = true;
+                }
+            }
+            if(conseguiuExcluir == false)
+            {
+                Console.WriteLine("O Id não foi Encontrado, Retornando...");
+                ExcluirEquipamento();
+            } else
+            {
+                for (int i = 0; i < equipamentos.Length; i++)
+                {
+                    if (equipamentos[i] == null) continue;
+                    if (equipamentos[i].Id > IdSelecionado)
+                    equipamentos[i].Id = equipamentos[i].Id - 1;
+                }
+                Console.WriteLine("O equipamento foi excluído com sucesso");
+                Console.WriteLine("A lista dos Id´s foi atualizada");
             }
         }
     }
