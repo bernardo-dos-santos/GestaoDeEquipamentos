@@ -14,6 +14,7 @@ namespace GestaoDeEquipamentosConsoleApp
         public int IdDoEquipamento;
         public string Descricao;
         public DateTime DataAbertura;
+        public string NomeEquipamento;
 
         public Chamadas( string titulo, int idDoEquipamento, string descricao, DateTime dataAbertura)
         {
@@ -22,5 +23,6 @@ namespace GestaoDeEquipamentosConsoleApp
             Descricao = descricao;
             DataAbertura = dataAbertura;
         }
+        
     }
 }

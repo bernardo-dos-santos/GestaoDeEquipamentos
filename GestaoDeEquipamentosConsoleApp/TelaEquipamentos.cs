@@ -10,7 +10,7 @@ namespace GestaoDeEquipamentosConsoleApp
 {
     public class TelaEquipamentos
     {
-        Equipamentos[] equipamentos = new Equipamentos[100];
+        public static Equipamentos[] equipamentos = new Equipamentos[100];
         public int contadorEquipamentos = 0;
 
         public string ExibirMenuEquipamentos()
@@ -81,8 +81,7 @@ namespace GestaoDeEquipamentosConsoleApp
                  "{0, -5} | {1, -20} | {2, -10} | {3, -16} | {4, -16} | {5, -9}",
                  a.Id, a.Nome, a.ObterNumeroSerie(), a.Fabricante, a.Preco.ToString("C2"), a.Data.ToShortDateString());
             }
-            Console.WriteLine("Digite Enter para retornar ao Menu de Equipamentos");
-            Console.ReadLine();
+            Console.WriteLine("Digite Enter para retornar ao Menu Principal");
         }
         public void EditarEquipamento()
         {
@@ -164,6 +163,22 @@ namespace GestaoDeEquipamentosConsoleApp
                 Console.WriteLine("O equipamento foi excluído com sucesso");
                 Console.WriteLine("A lista dos Id´s foi atualizada");
             }
+        }
+        public static string ObterNomeEquipamento(int idDoEquipamento)
+        {
+            string nomeDoEquipamento = null;
+            for (int i = 0; i < equipamentos.Length; i++)
+            {
+                Equipamentos a = equipamentos[i];
+                if (a == null) continue;
+                if (a.Id == idDoEquipamento)
+                {
+                    nomeDoEquipamento = a.Nome;
+                    break;
+                    
+                }
+            }
+            return nomeDoEquipamento;
         }
     }
 }
