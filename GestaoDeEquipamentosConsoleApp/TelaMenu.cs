@@ -19,6 +19,7 @@ namespace GestaoDeEquipamentosConsoleApp
 
             Console.WriteLine("1 - Gestão de Equipamentos");
             Console.WriteLine("2 - Gestão de Chamados");
+            Console.WriteLine("3 - Sair");
 
             string opcaoGestao = Console.ReadLine()!;
             return opcaoGestao;

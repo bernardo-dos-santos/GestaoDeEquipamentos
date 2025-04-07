@@ -9,7 +9,7 @@ namespace GestaoDeEquipamentosConsoleApp
     public class Chamadas
     {
 
-        public int IdChamado;
+        public int Id;
         public string Titulo;
         public int IdDoEquipamento;
         public string Descricao;

@@ -11,7 +11,8 @@
             {
                 Console.Clear();
                 string opcaoGestao = telaMenu.ExibirMenuPrincipal();
-
+                if (opcaoGestao == "3")
+                    break;
                 switch (opcaoGestao)
                 {
                     case "1":
@@ -32,7 +33,6 @@
                                 telaEquipamentos.ExcluirEquipamento();
                                 continue;
                             case "5":
-                                telaEquipamentos.ExcluirEquipamento();
                                 continue;
                             default:
                                 Console.WriteLine("Comando Incorreto. Retornando...");
@@ -41,7 +41,6 @@
 
                         }
                     case "2":
-
                         string opcaoChamado = telaChamado.ExibirMenuChamados();
                         switch (opcaoChamado)
                         {
@@ -52,13 +51,12 @@
                                 telaChamado.VisualizarChamados();
                                 continue;
                             case "3":
-                                telaChamado.CadastrarChamado();
+                                telaChamado.EditarChamado();
                                 continue;
                             case "4":
-                                telaChamado.CadastrarChamado();
+                                telaChamado.ExcluirChamado();
                                 continue;
                             case "5":
-                                telaChamado.CadastrarChamado();
                                 continue;
                             default:
                                 Console.WriteLine("Comando Incorreto. Retornando...");
@@ -66,17 +64,10 @@
                                 continue;
 
                         }
-                        continue;
-
                     default:
                         Console.WriteLine("Comando Incorreto. Retornando...");
                         Thread.Sleep(1500);
                         continue;
-
-
-
-
-
                 }
             }
         }
